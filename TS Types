@@ -1,0 +1,226 @@
+
+
+
+
+
+----------------------------------------------
+# Types
+
+## Primitives (typeof)
+
+### Strings, String Literal
+x: string = “”
+
+### Numbers, Numeric Literal
+x: number = 42.0
+ 
+### Boolean
+x: bool = true/false
+
+## TypeScript Types
+
+### Any
+x: any (TS Generic)
+
+### Union Types
+id: number | string
+
+
+
+
+
+----------------------------------------------
+# Object Types (instanceof)
+
+## Arrays
+let my_array: string[] = ["hello", "world"];
+let an_array: number[] = [1,2,3,...];
+
+## Functions
+funcName( x: string = “Hello”, y: number[] = [1,2,3] ): string[] {}
+
+## Annonymous Objects
+let obj_literal = {
+    x: string,
+    y: number,
+    o?: boolean
+};
+
+### Applied Anonymous Objects
+function greet(person: { name: string; age: number }) {
+    return "Hello " + person.name;
+}
+
+## Type Aliases (immutable)
+type ID = number | string
+type Point = {
+    x: number;
+    y: number;
+};
+
+### Applied Type Aliases
+type Person = {
+    name: string;
+    age: number;
+};
+function greet(person: Person) {
+    return "Hello " + person.name;
+}
+
+## Interfaces (extendable)
+interface Point {
+    x: number;
+    y: number;
+};
+interface Line extends Point {
+    d: number;
+};
+
+### Applied Interfaces
+interface Person {
+    name: string;
+    age: number;
+};
+function greet(person: Person) {
+    return "Hello " + person.name;
+}
+
+
+
+
+
+----------------------------------------------
+# Enums
+ * define a set of named constants
+ * can make it easier to document intent
+ * create a set of distinct cases
+
+## Numeric Enums
+ * initialized
+enum Direction {
+    Up = 1,     // 1
+    Down,       // 2
+    Left,       // 3
+    Right,      // 4
+}
+ * un-initialized
+enum Direction {
+    Up,         // 0
+    Down,       // 1
+    Left,       // 3
+    Right,      // 4
+}
+ * applied use case
+enum Vote {
+    No = 0,
+    Yes = 1,
+}
+function countBallot(candidate: string, counted: Vote): void {}
+countBallot("Joseph Grable", Vote.Yes);
+
+## String Enums
+enum Direction {
+    Up = "UP",
+    Down = "DOWN",
+    Left = "LEFT",
+    Right = "RIGHT",
+}
+
+## Union Enums and Enum Member Types 
+enum ShapeKind {
+    Circle,
+    Square,
+}
+interface Circle {
+    kind: ShapeKind.Circle;
+    radius: number;
+}
+interface Square {
+    kind: ShapeKind.Square;
+    sideLength: number;
+}
+
+## Enums at Compile Time
+enum LogLevel {
+    ERROR,
+    WARN,
+    INFO,
+    DEBUG,
+}
+// This is equivalent to:
+// type LogLevelStrings = 'ERROR' | 'WARN' | 'INFO' | 'DEBUG';
+type LogLevelStrings = keyof typeof LogLevel;
+
+## Enum Reverse Mappings
+enum Enum {
+    A,
+}
+let a = Enum.A;
+let nameOfA = Enum[a]; // "A"
+
+## Constant Enums (Single Instance)
+const enum Enum {
+    A = 1,
+    B,
+}
+
+
+
+
+
+# Type Assertions
+const p1 = addCanvasPoint( 5, 10 ) as Point;
+const p2 = <Point>addCanvasPoint( 10, 5 );
+const ln1 = getCanvasLine( p1, p2 ) as Line;
+const ln2 = <Line>getCanvasLine( p1, p2 );
+
+
+
+
+
+# Type Guard Narrowing (typeof)
+if ( typeof x === "boolean" ) {}
+ * “string”
+ * “number”
+ * “bigint”
+ * “boolean”
+ * “symbol”
+ * “undefined”
+ * “object”
+ * “function”
+
+
+
+
+
+# Truthiness Narrowing
+
+## Coerced -> false
+ * 0
+ * NaN
+ * "" (the empty string)
+ * 0n (the bigint version of zero)
+ * null
+ * undefined
+
+## All Others Coerce -> true
+ * 1
+ * "hello"
+ * [2,3]
+ * { "hello": "world" }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
