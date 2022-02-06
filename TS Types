@@ -85,6 +85,12 @@ function greet(person: Person) {
     return "Hello " + person.name;
 }
 
+## Type Assertions
+const p1 = addCanvasPoint( 5, 10 ) as Point;
+const p2 = <Point>addCanvasPoint( 10, 5 );
+const ln1 = getCanvasLine( p1, p2 ) as Line;
+const ln2 = <Line>getCanvasLine( p1, p2 );
+
 
 
 
@@ -163,16 +169,6 @@ const enum Enum {
     A = 1,
     B,
 }
-
-
-
-
-
-# Type Assertions
-const p1 = addCanvasPoint( 5, 10 ) as Point;
-const p2 = <Point>addCanvasPoint( 10, 5 );
-const ln1 = getCanvasLine( p1, p2 ) as Line;
-const ln2 = <Line>getCanvasLine( p1, p2 );
 
 
 
